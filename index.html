@@ -1,70 +1,1001 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-        body { color: #333; line-height: 1.6; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: bold; color: #111; }
-        nav a { margin-left: 20px; text-decoration: none; color: #555; font-weight: 500; }
-        nav a:hover { color: #007bff; }
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 10%; background: #fdfdfd; pt: 80px; }
-        .hero-text h1 { font-size: 48px; margin-bottom: 10px; }
-        .hero-text p { font-size: 18px; color: #666; margin-bottom: 30px; }
-        .btn { display: inline-block; padding: 12px 24px; background: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 15px; }
-        .btn-dark { background: #111; }
-        .hero-img img { width: 350px; height: 350px; border-radius: 50%; object-fit: cover; }
-        .about { padding: 100px 10%; background: #fff; text-align: center; }
-        .about h2 { font-size: 36px; margin-bottom: 40px; }
-        .about-content { max-width: 800px; margin: 0 auto; text-align: left; background: #f9f9f9; padding: 40px; border-radius: 10px; }
-        .about-content p { margin-bottom: 20px; font-size: 16px; }
-        .info-list { list-style: none; margin-top: 20px; }
-        .info-list li { margin-bottom: 10px; font-size: 16px; }
-        .info-list strong { color: #007bff; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baek Kyungrok — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --bg-soft: #F7F7F5;
+      --text-dark: #1A1A1A;
+      --text-mid: #5A5A5A;
+      --text-light: #9A9A9A;
+      --green: #6B8F5E;
+      --green-light: #E8F0E4;
+      --green-dark: #4A6B3E;
+      --border: #E4E4E0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* ── SIDE NAV ── */
+    .side-nav {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .side-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .side-nav a .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s, transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .side-nav a .label {
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+    }
+
+    .side-nav:hover a .label { opacity: 1; }
+
+    .side-nav a.active .dot {
+      background: var(--green);
+      transform: scale(1.6);
+    }
+
+    .side-nav a.active { color: var(--green); }
+
+    /* ── TOP NAV ── */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 99;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .top-bar .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .top-bar nav a {
+      margin-left: 2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .top-bar nav a:hover { color: var(--green); }
+
+    /* ── SECTIONS ── */
+    section {
+      min-height: 100vh;
+      padding: 7rem 6rem 5rem 6rem;
+      display: flex;
+      align-items: center;
+    }
+
+    section:nth-child(even) { background: var(--bg-soft); }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.15;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      padding: 0 6rem;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-name span {
+      color: var(--green);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      color: var(--text-mid);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-mid);
+      max-width: 500px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--green);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+    .hero-deco {
+      position: absolute;
+      right: -4rem;
+      bottom: -4rem;
+      width: 45vw;
+      height: 45vw;
+      max-width: 500px;
+      max-height: 500px;
+      border-radius: 50%;
+      background: var(--green-light);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .meta-block h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.4rem 0;
+      font-size: 0.9rem;
+    }
+
+    .meta-row .yr {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 300;
+    }
+
+    .meta-row .val {
+      color: var(--text-dark);
+      font-weight: 400;
+      text-align: right;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .skill-card h4 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-item span {
+      font-size: 0.88rem;
+      color: var(--text-dark);
+    }
+
+    .skill-bar {
+      width: 120px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      background: var(--white);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 6px 30px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+
+    .project-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--green-light);
+      line-height: 1;
+      min-width: 2rem;
+    }
+
+    .project-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-body p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: var(--green-light);
+      color: var(--green-dark);
+    }
+
+    .project-period {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    /* ── GOALS ── */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .goal-card {
+      padding: 2rem;
+      border-radius: 10px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .goal-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      border-radius: 10px 0 0 10px;
+      background: var(--green);
+    }
+
+    .goal-card h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    .goal-card .period {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .goal-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .goal-card ul li {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .goal-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-size: 0.75rem;
+    }
+
+    /* ── AWARDS & CERTS ── */
+    .ac-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .ac-col-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ac-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .ac-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .ac-item-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .ac-name {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .ac-org {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .ac-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .ac-badge--plan {
+      background: var(--green-light);
+      color: var(--green-dark);
+    }
+
+    .ac-badge--done {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .ac-badge--award {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .ac-empty {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      padding: 1.5rem 0;
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .ac-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--text-dark);
+    }
+
+    #contact .eyebrow { color: var(--green); }
+
+    #contact .section-title { color: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(107,143,94,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item a,
+    .contact-item span {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover { color: var(--green); }
+
+    .contact-cert {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+
+    .contact-cert h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.2rem;
+    }
+
+    .cert-item {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cert-badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(107,143,94,0.25);
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    footer {
+      background: var(--text-dark);
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      section { padding: 6rem 2rem 4rem 2rem; }
+      #hero { padding: 0 2rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .goals-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .side-nav { display: none; }
+      .top-bar { padding: 1rem 1.5rem; }
+      .top-bar nav a { margin-left: 1rem; font-size: 0.72rem; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-num { font-size: 1.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">MyPortfolio.</div>
-        <nav>
-            <a href="#home">소개</a>
-            <a href="#about">기술/학력</a>
-            <a href="#projects">프로젝트</a>
-            <a href="#contact">연락처</a>
-        </nav>
-    </header>
+  <!-- TOP NAV -->
+  <header class="top-bar">
+    <a href="#hero" class="logo">BK.</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#awards">Awards</a>
+      <a href="#goals">Goals</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <section class="hero" id="home">
-        <div class="hero-text">
-            <p style="color: #007bff; font-weight: bold; margin-bottom: 10px;">WELCOME TO MY PORTFOLIO</p>
-            <h1>안녕하세요, <br>코딩 애호가 백경록입니다.</h1>
-            <p>새로운 기술을 배우고 문제를 해결하는 것을 즐깁니다.<br>사용자 경험을 중요하게 생각하며 깔끔한 코드를 작성하기 위해 노력합니다.</p>
-            <a href="#projects" class="btn">프로젝트 보기</a>
-            <a href="#contact" class="btn btn-dark">연락하기</a>
-        </div>
-        <div class="hero-img">
-            <!-- 과제 이미지와 유사한 기본 AI 아이콘 링크입니다. 원하는 본인 사진 링크로 대체 가능합니다 -->
-            <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Profile Image">
-        </div>
-    </section>
+  <!-- SIDE NAV -->
+  <nav class="side-nav" aria-label="Section navigation">
+    <a href="#hero" data-section="hero"><span class="dot"></span><span class="label">Intro</span></a>
+    <a href="#about" data-section="about"><span class="dot"></span><span class="label">About</span></a>
+    <a href="#skills" data-section="skills"><span class="dot"></span><span class="label">Skills</span></a>
+    <a href="#projects" data-section="projects"><span class="dot"></span><span class="label">Projects</span></a>
+    <a href="#awards" data-section="awards"><span class="dot"></span><span class="label">Awards</span></a>
+    <a href="#goals" data-section="goals"><span class="dot"></span><span class="label">Goals</span></a>
+    <a href="#contact" data-section="contact"><span class="dot"></span><span class="label">Contact</span></a>
+  </nav>
 
-    <section class="about" id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <h3 style="margin-bottom: 15px; color: #111;">어제보다 오늘 더 성장하는 개발자</h3>
-            <p>안녕하세요! 컴퓨터소프트웨어공학에 푹 빠져있는 백경록입니다. 논리적인 구조를 설계하고 코드의 성능을 최적화하는 과정에서 큰 흥미를 느낍니다. 어려운 문제에 부딪혔을 때 원인을 철저히 분석하고 해결해 나가는 과정을 즐깁니다.</p>
-            <hr style="border: 0; height: 1px; background: #eee; margin: 20px 0;">
-            <ul class="info-list">
-                <li><strong>📍 거주지:</strong> 대한민국, 서울 금천구</li>
-                <li><strong>💻 관심 분야:</strong> 소프트웨어 최적화, 웹 개발, 시스템 스크립트 고도화</li>
-                <li><strong>🎓 학력:</strong> 동양미래대학교 컴퓨터소프트웨어공학과</li>
-            </ul>
-        </div>
-    </section>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-deco"></div>
+    <div class="hero-inner">
+      <div class="hero-tag">배움을 즐기는 개발자</div>
+      <h1 class="hero-name">Baek<br /><span>Kyungrok</span></h1>
+      <p class="hero-sub">Web Developer &amp; Server Engineer</p>
+      <p class="hero-desc">
+        새로운 진로에 도전하기 위해 컴퓨터소프트웨어학과에 진학하였으며,<br />
+        웹 개발과 데이터베이스 분야를 중심으로 꾸준히 성장하고 있습니다.
+      </p>
+      <a href="#about" class="hero-cta">
+        포트폴리오 보기 ↓
+      </a>
+    </div>
+  </section>
 
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="eyebrow">About Me</p>
+      <h2 class="section-title">체계적으로 문제를<br />해결하는 개발자</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            안녕하세요, 백경록입니다. 이전 전공(약기제작학)에서의 경험을 바탕으로 새로운 분야인 소프트웨어 개발에 도전하고 있습니다. 꼼꼼하고 체계적인 성향으로, 문제를 깊이 파고들어 논리적으로 해결하는 것을 즐깁니다.
+          </p>
+          <p>
+            게임 서버를 직접 구축하고 운영하며 서버 관리, 데이터 관리, 모드 개발 경험을 쌓아왔으며, 이를 발판 삼아 웹 개발과 데이터베이스 분야의 전문 개발자로 성장하고자 합니다.
+          </p>
+        </div>
+        <div class="about-meta">
+          <div class="meta-block">
+            <h4>학력사항</h4>
+            <div class="meta-row"><span class="yr">2017.03–2019.02</span><span class="val">문일고등학교 졸업</span></div>
+            <div class="meta-row"><span class="yr">2020.03–2025.02</span><span class="val">경주대 악기제작학과 졸업</span></div>
+            <div class="meta-row"><span class="yr">2026.03–현재</span><span class="val">동양미래대 컴퓨터소프트웨어학과 재학</span></div>
+          </div>
+          <div class="meta-block">
+            <h4>경력사항</h4>
+            <div class="meta-row"><span class="yr">2024.01–현재</span><span class="val">게임 서버 구축 및 운영</span></div>
+            <div class="meta-row"><span class="yr">2024.06–현재</span><span class="val">게임 서버 모드 개발 및 수정</span></div>
+            <div class="meta-row"><span class="yr">2025.05–현재</span><span class="val">Windows XP 구현 프로젝트</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <p class="eyebrow">Skills</p>
+      <h2 class="section-title">기술 스택</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h4>Languages</h4>
+          <div class="skill-item"><span>Python</span><div class="skill-bar"><div class="skill-bar-fill" style="width:65%"></div></div></div>
+          <div class="skill-item"><span>Java</span><div class="skill-bar"><div class="skill-bar-fill" style="width:50%"></div></div></div>
+          <div class="skill-item"><span>JavaScript</span><div class="skill-bar"><div class="skill-bar-fill" style="width:40%"></div></div></div>
+        </div>
+        <div class="skill-card">
+          <h4>Web Development</h4>
+          <div class="skill-item"><span>HTML / CSS</span><div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div></div>
+          <div class="skill-item"><span>Web Layout</span><div class="skill-bar"><div class="skill-bar-fill" style="width:55%"></div></div></div>
+          <div class="skill-item"><span>UI 구현</span><div class="skill-bar"><div class="skill-bar-fill" style="width:50%"></div></div></div>
+        </div>
+        <div class="skill-card">
+          <h4>Database</h4>
+          <div class="skill-item"><span>SQLite</span><div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div></div>
+          <div class="skill-item"><span>SQL 기초</span><div class="skill-bar"><div class="skill-bar-fill" style="width:50%"></div></div></div>
+          <div class="skill-item"><span>MySQL (학습 중)</span><div class="skill-bar"><div class="skill-bar-fill" style="width:20%"></div></div></div>
+        </div>
+        <div class="skill-card">
+          <h4>Server &amp; Networking</h4>
+          <div class="skill-item"><span>Fabric 서버 운영</span><div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+          <div class="skill-item"><span>서버 환경 설정</span><div class="skill-bar"><div class="skill-bar-fill" style="width:65%"></div></div></div>
+          <div class="skill-item"><span>Linux (학습 예정)</span><div class="skill-bar"><div class="skill-bar-fill" style="width:10%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-inner">
+      <p class="eyebrow">Projects</p>
+      <h2 class="section-title">프로젝트</h2>
+      <div class="projects-list">
+        <div class="project-card">
+          <div class="project-num">01</div>
+          <div class="project-body">
+            <h3>멀티플레이 게임 서버 백엔드 구축 및 운영</h3>
+            <p>Fabric 프레임워크 기반의 멀티플레이어 서버를 직접 설계·구축하고 지속 운영 중인 개인 프로젝트입니다. 서버 환경 설정, SQLite 기반 데이터 관리 시스템 구현, 플러그인(모드) 개발 및 유지보수, 네트워크 접속 환경 구성, 성능 모니터링 및 최적화까지 백엔드 운영 전반을 단독으로 수행했습니다.</p>
+            <div class="project-tags">
+              <span class="tag">Fabric Framework</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">Backend 운영</span>
+              <span class="tag">Plugin 개발</span>
+              <span class="tag">네트워크 설정</span>
+              <span class="tag">Performance Tuning</span>
+            </div>
+          </div>
+          <div class="project-period">2024.01 – 현재<br /><small>기여도 100%</small></div>
+        </div>
+        <div class="project-card">
+          <div class="project-num">02</div>
+          <div class="project-body">
+            <h3>Windows XP 구현 프로젝트</h3>
+            <p>HTML, CSS, JavaScript를 활용해 Windows XP 환경을 웹 브라우저에서 구현하는 팀 프로젝트에 참여하였습니다. Internet Explorer 브라우저 UI와 2006년 Yahoo! Korea 메인 페이지 UI 구현을 담당했습니다.</p>
+            <div class="project-tags">
+              <span class="tag">HTML / CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">UI 구현</span>
+              <span class="tag">팀 프로젝트</span>
+            </div>
+          </div>
+          <div class="project-period">2025.05 – 현재<br /><small>기여도 20%</small></div>
+        </div>
+
+        <!-- ★ 프로젝트 추가 시 아래 블록을 복사해서 붙여넣으세요 ★
+        <div class="project-card">
+          <div class="project-num">03</div>
+          <div class="project-body">
+            <h3>프로젝트 제목</h3>
+            <p>프로젝트 설명을 여기에 작성하세요.</p>
+            <div class="project-tags">
+              <span class="tag">기술 태그</span>
+            </div>
+          </div>
+          <div class="project-period">YYYY.MM – YYYY.MM<br /><small>기여도 XX%</small></div>
+        </div>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS & CERTS -->
+  <section id="awards">
+    <div class="section-inner">
+      <p class="eyebrow">Awards &amp; Certificates</p>
+      <h2 class="section-title">수상 및 자격증</h2>
+      <div class="ac-grid">
+        <div class="ac-col">
+          <h4 class="ac-col-title">🏆 수상내역</h4>
+          <div class="ac-list">
+            <!-- ★ 수상내역 추가 시 아래 블록을 복사해서 붙여넣으세요 ★
+            <div class="ac-item">
+              <div class="ac-item-left">
+                <span class="ac-name">수상명</span>
+                <span class="ac-org">주최 기관</span>
+              </div>
+              <span class="ac-badge ac-badge--award">YYYY.MM</span>
+            </div>
+            -->
+            <div class="ac-empty">아직 등록된 수상내역이 없습니다.</div>
+          </div>
+        </div>
+        <div class="ac-col">
+          <h4 class="ac-col-title">📜 자격증</h4>
+          <div class="ac-list">
+            <!-- ★ 자격증 추가 시 아래 블록을 복사해서 붙여넣으세요 ★
+            취득 완료: ac-badge--done / 취득 예정: ac-badge--plan
+            <div class="ac-item">
+              <div class="ac-item-left">
+                <span class="ac-name">자격증명</span>
+                <span class="ac-org">발급 기관</span>
+              </div>
+              <span class="ac-badge ac-badge--done">YYYY.MM 취득</span>
+            </div>
+            -->
+            <div class="ac-item">
+              <div class="ac-item-left">
+                <span class="ac-name">정보처리산업기사</span>
+                <span class="ac-org">한국산업인력공단</span>
+              </div>
+              <span class="ac-badge ac-badge--plan">취득 예정</span>
+            </div>
+            <div class="ac-item">
+              <div class="ac-item-left">
+                <span class="ac-name">SQLD</span>
+                <span class="ac-org">한국데이터산업진흥원</span>
+              </div>
+              <span class="ac-badge ac-badge--plan">취득 예정</span>
+            </div>
+            <div class="ac-item">
+              <div class="ac-item-left">
+                <span class="ac-name">SQLP</span>
+                <span class="ac-org">한국데이터산업진흥원</span>
+              </div>
+              <span class="ac-badge ac-badge--plan">취득 예정</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOALS -->
+  <section id="goals">
+    <div class="section-inner">
+      <p class="eyebrow">Career Goals</p>
+      <h2 class="section-title">향후 계획 및 목표</h2>
+      <div class="goals-grid">
+        <div class="goal-card">
+          <h4>단기 목표</h4>
+          <p class="period">1 – 2년</p>
+          <ul>
+            <li>SQLD 자격증 취득</li>
+            <li>JavaScript 및 데이터베이스 학습 심화</li>
+            <li>전공 과목 우수 성적 취득</li>
+            <li>Python 활용 능력 향상</li>
+          </ul>
+        </div>
+        <div class="goal-card">
+          <h4>중기 목표</h4>
+          <p class="period">졸업 전</p>
+          <ul>
+            <li>정보처리산업기사 취득</li>
+            <li>현장실습 프로그램 참여</li>
+            <li>웹 개발 프로젝트 경험 확대</li>
+            <li>소프트웨어 개발 프로세스 이해</li>
+          </ul>
+        </div>
+        <div class="goal-card">
+          <h4>장기 목표</h4>
+          <p class="period">Career</p>
+          <ul>
+            <li>소프트웨어 개발자 취업</li>
+            <li>데이터베이스 및 서버 관리 역량 강화</li>
+            <li>지속적인 자기계발로 전문성 향상</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="eyebrow">Contact</p>
+      <h2 class="section-title">연락처</h2>
+      <div class="contact-grid">
+        <div>
+          <p class="contact-desc">
+            배움과 도전을 통해 꾸준히 성장하는 개발자, 백경록입니다.<br />
+            협업이나 문의는 아래 연락처로 편하게 연락해 주세요.
+          </p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon">✉</div>
+              <a href="mailto:baekrok516@gmail.com">baekrok516@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <span>010-5507-3285</span>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">🎓</div>
+              <span>동양미래대학교 컴퓨터소프트웨어공학과</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-cert">
+          <h4>자격증 취득 예정</h4>
+          <div class="cert-item"><span>정보처리산업기사</span><span class="cert-badge">취득 예정</span></div>
+          <div class="cert-item"><span>SQLD</span><span class="cert-badge">취득 예정</span></div>
+          <div class="cert-item"><span>SQLP</span><span class="cert-badge">취득 예정</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Baek Kyungrok — All rights reserved
+  </footer>
+
+  <script>
+    // Side nav active section tracking
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.side-nav a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.side-nav a[data-section="${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
 </body>
 </html>
