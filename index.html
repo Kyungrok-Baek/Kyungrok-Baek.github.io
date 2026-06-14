@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { color: #333; line-height: 1.6; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: bold; color: #111; }
+        nav a { margin-left: 20px; text-decoration: none; color: #555; font-weight: 500; }
+        nav a:hover { color: #007bff; }
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 10%; background: #fdfdfd; pt: 80px; }
+        .hero-text h1 { font-size: 48px; margin-bottom: 10px; }
+        .hero-text p { font-size: 18px; color: #666; margin-bottom: 30px; }
+        .btn { display: inline-block; padding: 12px 24px; background: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 15px; }
+        .btn-dark { background: #111; }
+        .hero-img img { width: 350px; height: 350px; border-radius: 50%; object-fit: cover; }
+        .about { padding: 100px 10%; background: #fff; text-align: center; }
+        .about h2 { font-size: 36px; margin-bottom: 40px; }
+        .about-content { max-width: 800px; margin: 0 auto; text-align: left; background: #f9f9f9; padding: 40px; border-radius: 10px; }
+        .about-content p { margin-bottom: 20px; font-size: 16px; }
+        .info-list { list-style: none; margin-top: 20px; }
+        .info-list li { margin-bottom: 10px; font-size: 16px; }
+        .info-list strong { color: #007bff; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">MyPortfolio.</div>
+        <nav>
+            <a href="#home">소개</a>
+            <a href="#about">기술/학력</a>
+            <a href="#projects">프로젝트</a>
+            <a href="#contact">연락처</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <p style="color: #007bff; font-weight: bold; margin-bottom: 10px;">WELCOME TO MY PORTFOLIO</p>
+            <h1>안녕하세요, <br>코딩 애호가 백경록입니다.</h1>
+            <p>새로운 기술을 배우고 문제를 해결하는 것을 즐깁니다.<br>사용자 경험을 중요하게 생각하며 깔끔한 코드를 작성하기 위해 노력합니다.</p>
+            <a href="#projects" class="btn">프로젝트 보기</a>
+            <a href="#contact" class="btn btn-dark">연락하기</a>
+        </div>
+        <div class="hero-img">
+            <!-- 과제 이미지와 유사한 기본 AI 아이콘 링크입니다. 원하는 본인 사진 링크로 대체 가능합니다 -->
+            <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Profile Image">
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <h3 style="margin-bottom: 15px; color: #111;">어제보다 오늘 더 성장하는 개발자</h3>
+            <p>안녕하세요! 컴퓨터소프트웨어공학에 푹 빠져있는 백경록입니다. 논리적인 구조를 설계하고 코드의 성능을 최적화하는 과정에서 큰 흥미를 느낍니다. 어려운 문제에 부딪혔을 때 원인을 철저히 분석하고 해결해 나가는 과정을 즐깁니다.</p>
+            <hr style="border: 0; height: 1px; background: #eee; margin: 20px 0;">
+            <ul class="info-list">
+                <li><strong>📍 거주지:</strong> 대한민국, 서울 금천구</li>
+                <li><strong>💻 관심 분야:</strong> 소프트웨어 최적화, 웹 개발, 시스템 스크립트 고도화</li>
+                <li><strong>🎓 학력:</strong> 동양미래대학교 컴퓨터소프트웨어공학과</li>
+            </ul>
+        </div>
+    </section>
+
+</body>
+</html>
